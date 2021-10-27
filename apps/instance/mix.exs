@@ -31,9 +31,9 @@ defmodule Staxx.Instance.MixProject do
     [
       {:event_stream, in_umbrella: true},
       {:testchain, in_umbrella: true},
-      {:poison, "~> 3.1.0"},
-      {:faker, "~> 0.12", only: :test},
-      {:ex_machina, "~> 2.3", only: :test}
+      {:poison, "~> 5.0"},
+      {:faker, "~> 0.16", only: :test},
+      {:ex_machina, "~> 2.7", only: :test}
     ]
   end
 end

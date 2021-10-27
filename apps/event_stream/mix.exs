@@ -33,8 +33,8 @@ defmodule Staxx.EventStream.MixProject do
       {:event_bus, "~> 1.6.1"},
       {:uuid, "~> 1.1"},
       {:gnat, "~> 1.2"},
-      {:jason, "~> 1.1"},
-      {:faker, "~> 0.12", only: :test}
+      {:jason, "~> 1.2"},
+      {:faker, "~> 0.16", only: :test}
     ]
   end
 end

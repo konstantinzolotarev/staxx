@@ -40,16 +40,16 @@ defmodule Staxx.WebApi.MixProject do
       {:event_stream, in_umbrella: true},
       {:store, in_umbrella: true},
       {:testchain, in_umbrella: true},
-      {:phoenix, "~> 1.5"},
+      {:phoenix, "~> 1.6"},
       {:phoenix_pubsub, "~> 2.0"},
       {:gettext, "~> 0.18"},
-      {:jason, "~> 1.0"},
-      {:poison, "~> 3.1"},
-      {:plug, "~> 1.11"},
-      {:plug_cowboy, "~> 2.4"},
+      {:jason, "~> 1.2"},
+      {:poison, "~> 5.0"},
+      {:plug, "~> 1.12"},
+      {:plug_cowboy, "~> 2.5"},
       {:corsica, "~> 1.1"},
-      {:faker, "~> 0.12", only: :test},
-      {:ex_machina, "~> 2.3", only: :test},
+      {:faker, "~> 0.16", only: :test},
+      {:ex_machina, "~> 2.7", only: :test},
       {:ex_json_schema, "~> 0.7.3"}
     ]
   end

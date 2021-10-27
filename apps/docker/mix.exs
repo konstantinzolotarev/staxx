@@ -31,9 +31,9 @@ defmodule Staxx.Docker.MixProject do
   defp deps do
     [
       {:event_stream, in_umbrella: true},
-      {:poison, "~> 3.1"},
-      {:jason, "~> 1.1"},
-      {:faker, "~> 0.12", only: :test}
+      {:poison, "~> 5.0"},
+      {:jason, "~> 1.2"},
+      {:faker, "~> 0.16", only: :test}
     ]
   end
 end

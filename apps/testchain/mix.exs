@@ -38,12 +38,12 @@ defmodule Staxx.Testchain.MixProject do
       {:event_stream, in_umbrella: true},
       {:store, in_umbrella: true},
       {:utils, in_umbrella: true},
-      {:poison, "~> 3.1"},
+      {:poison, "~> 5.0"},
       {:poolboy, "~> 1.5.1"},
       {:ksha3, "~> 1.0.0", git: "https://github.com/onyxrev/ksha3.git", branch: "master"},
       {:ethereum_wallet, github: "onyxrev/ethereum_wallet_elixir"},
-      {:jason, "~> 1.1"},
-      {:faker, "~> 0.11", only: :test},
+      {:jason, "~> 1.2"},
+      {:faker, "~> 0.16", only: :test},
       {:progress_bar, "~> 2.0", only: [:dev, :test]}
     ]
   end
