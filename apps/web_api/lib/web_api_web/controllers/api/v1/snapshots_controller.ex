@@ -7,12 +7,13 @@ defmodule Staxx.WebApiWeb.Api.V1.SnapshotController do
   alias Staxx.Testchain.SnapshotManager
   alias Staxx.WebApiWeb.Api.V1.SuccessView
   alias Staxx.WebApiWeb.Api.V1.ErrorView
-  alias Staxx.WebApiWeb.Schemas.TestchainSchema
+  # alias Staxx.WebApiWeb.Schemas.TestchainSchema
 
   # content type of snapshot that will be uploaded
   @filetypes ["application/x-gzip", "application/gzip"]
 
   # Take snapshot command
+  @spec take_snapshot(Plug.Conn.t(), map) :: Plug.Conn.t()
   def take_snapshot(conn, %{"id" => id} = params) do
     with :ok <- Testchain.take_snapshot(id, Map.get(params, "description", "")) do
       conn
@@ -23,6 +24,7 @@ defmodule Staxx.WebApiWeb.Api.V1.SnapshotController do
   end
 
   # Take snapshot command
+  @spec revert_snapshot(any, map) :: {:error, <<_::64, _::_*8>>} | Plug.Conn.t()
   def revert_snapshot(conn, %{"id" => id, "snapshot_id" => snapshot_id})
       when is_binary(snapshot_id) do
     with :ok <- Testchain.revert_snapshot(id, snapshot_id) do
@@ -34,6 +36,7 @@ defmodule Staxx.WebApiWeb.Api.V1.SnapshotController do
   end
 
   # load list of snapshots for chain
+  @spec list_snapshots(Plug.Conn.t(), map) :: Plug.Conn.t()
   def list_snapshots(conn, %{"evm_type" => evm_type}) do
     list =
       evm_type
@@ -46,6 +49,7 @@ defmodule Staxx.WebApiWeb.Api.V1.SnapshotController do
     |> render("200.json", data: list)
   end
 
+  @spec remove_snapshot(Plug.Conn.t(), map) :: Plug.Conn.t()
   def remove_snapshot(conn, %{"id" => id}) do
     with :ok <- SnapshotManager.remove(id) do
       conn
@@ -55,6 +59,7 @@ defmodule Staxx.WebApiWeb.Api.V1.SnapshotController do
     end
   end
 
+  @spec upload_snapshot(Plug.Conn.t(), any) :: false | {:error, any} | Plug.Conn.t()
   def upload_snapshot(conn, %{
         "snapshot" => %{"file" => file, "description" => description, "type" => type}
       }) do
@@ -84,6 +89,7 @@ defmodule Staxx.WebApiWeb.Api.V1.SnapshotController do
   end
 
   # Load snapshot details and download file
+  @spec download_snapshot(Plug.Conn.t(), map) :: Plug.Conn.t()
   def download_snapshot(conn, %{"id" => id}) do
     with %{path: path} <- SnapshotManager.by_id(id),
          true <- File.exists?(path) do

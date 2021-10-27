@@ -123,9 +123,9 @@ defmodule Staxx.Docker.Adapter.DockerD do
 
     # Stop with 4s delay
     case System.cmd(executable!(), ["stop", "-t", "4", id_or_name], stderr_to_stdout: true) do
-      # Ganache my love will not terminate with 0 status. Only 137
-      {id, status} when status in [0, 137] ->
-        {:ok, String.replace(id, "\n", "")}
+      # Ganache (my love) will not terminate with 0 status. Only 137
+      {_id, status} when status in [0, 137] ->
+        :ok
 
       {err, exit_status} ->
         Logger.error("Failed to stop container with code: #{exit_status} - #{inspect(err)}")
@@ -310,11 +310,9 @@ defmodule Staxx.Docker.Adapter.DockerD do
 
   # defp build_name(%Container{name: name}), do: ["--name", name, "-h", name, "--network-alias", name]
   defp build_name(%Container{name: name}), do: ["--name", name]
-  defp build_name(_container), do: ""
 
   defp build_network(%Container{network: ""}), do: ""
   defp build_network(%Container{network: network}), do: ["--network", network]
-  defp build_network(_container), do: ""
 
   defp build_ports(%Container{ports: []}), do: ""
 
@@ -336,8 +334,6 @@ defmodule Staxx.Docker.Adapter.DockerD do
     |> List.flatten()
   end
 
-  defp build_env(%Container{env: []}), do: []
-
   defp build_env(%Container{env: env}) do
     env
     |> Enum.map(fn {key, val} -> ["-e", "'#{key}=#{val}'"] end)
@@ -354,10 +350,10 @@ defmodule Staxx.Docker.Adapter.DockerD do
 
   defp exec(command) when is_binary(command) do
     Logger.debug("""
-    Running new Docker command: 
+    Running new Docker command:
     #{command}
     """)
-    
+
     command
     |> String.to_charlist()
     |> :os.cmd()

@@ -7,7 +7,7 @@ defmodule Staxx.WebApiWeb.SnapshotControllerTest do
 
   @moduletag :api
 
-  describe "Snapshot tests::" do
+  describe "Snapshot tests ::" do
     test "new snapshot shouldn't be created because of random id", %{conn: conn} do
       params = %{
         id: Faker.UUID.v4(),
@@ -25,13 +25,13 @@ defmodule Staxx.WebApiWeb.SnapshotControllerTest do
       )
     end
 
-    test "new snapshot shouldn't be created because of json schema validation fail", %{conn: conn} do
-      params = %{id: Faker.UUID.v4(), config: %{prprp: Faker.String.base64()}}
+    # test "new snapshot shouldn't be created because of json schema validation fail", %{conn: conn} do
+    #   params = %{id: Faker.UUID.v4(), config: %{prprp: Faker.String.base64()}}
 
-      conn
-      |> post(Routes.snapshot_path(conn, :take_snapshot, params.id), params)
-      |> json_response(500)
-    end
+    #   conn
+    #   |> post(Routes.snapshot_path(conn, :take_snapshot, params.id), params)
+    #   |> json_response(500)
+    # end
 
     test "should return list with three `geth` typed snapshot", %{conn: conn} do
       chain_type = "geth"

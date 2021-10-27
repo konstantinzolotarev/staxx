@@ -6,10 +6,9 @@ defmodule Staxx.Docker.NetworkRemover do
   Some sort of a cron job. But way more simple, lightweight and OTP based
   """
   use GenServer
+  require Logger
 
   alias Staxx.Docker
-
-  require Logger
 
   @timeout 360_000
 

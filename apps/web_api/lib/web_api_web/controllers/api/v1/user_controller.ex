@@ -12,6 +12,7 @@ defmodule Staxx.WebApiWeb.Api.V1.UserController do
   @doc """
   List of all users in system
   """
+  @spec list(Plug.Conn.t(), map) :: Plug.Conn.t()
   def list(conn, params) do
     with users <- User.list(Map.get(params, "limit", 50), Map.get(params, "offset", 0)) do
       conn
@@ -24,6 +25,7 @@ defmodule Staxx.WebApiWeb.Api.V1.UserController do
   @doc """
   Create new user in system
   """
+  @spec create(Plug.Conn.t(), %{optional(binary) => any}) :: Plug.Conn.t()
   def create(conn, params) do
     with :ok <- UserSchema.validate(params),
          {:ok, user} <- User.create(params) do
@@ -37,6 +39,7 @@ defmodule Staxx.WebApiWeb.Api.V1.UserController do
   @doc """
   Update given user
   """
+  @spec update(Plug.Conn.t(), %{optional(binary) => any}) :: Plug.Conn.t()
   def update(conn, %{"id" => user_id} = params) do
     with :ok <- UserSchema.validate(params),
          %User{} = user <- User.get(user_id),
@@ -51,6 +54,7 @@ defmodule Staxx.WebApiWeb.Api.V1.UserController do
   @doc """
   Get user details
   """
+  @spec get(Plug.Conn.t(), map) :: nil | Plug.Conn.t()
   def get(conn, %{"id" => user_id}) do
     with %User{} = user <- User.get(user_id) do
       conn

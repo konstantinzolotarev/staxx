@@ -12,9 +12,8 @@ defmodule Staxx.Docker.PortMapper do
   @range 49152..65535
 
   @doc false
-  def start_link(_) do
-    GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
-  end
+  def start_link(_),
+    do: GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
 
   @doc false
   def init(:ok) do
