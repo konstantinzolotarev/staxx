@@ -32,11 +32,11 @@ defmodule Staxx.SnapshotRegistry.MixProject do
     [
       {:utils, in_umbrella: true},
       {:transport, in_umbrella: true},
-      {:ecto_sql, "~> 3.5"},
+      {:ecto_sql, "~> 3.7"},
       {:postgrex, ">= 0.0.0"},
-      {:plug_cowboy, "~> 2.4"},
-      {:joken, "~> 2.0"},
-      {:jason, "~> 1.1"}
+      {:plug_cowboy, "~> 2.5"},
+      {:joken, "~> 2.4"},
+      {:jason, "~> 1.2"}
     ]
   end
 end
