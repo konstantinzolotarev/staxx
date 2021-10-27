@@ -12,6 +12,7 @@ defmodule Staxx.WebApiWeb.Api.V1.DockerController do
   alias Staxx.Instance
   alias Staxx.WebApiWeb.Schemas.DockerSchema
 
+  @spec start(Plug.Conn.t(), %{optional(binary) => any}) :: Plug.Conn.t()
   def start(conn, %{"instance_id" => id, "stack_name" => stack_name} = params) do
     # We wouldn't let users to control `rm` flag for container
     # Otherwise we will have a log of dead containers in our system
@@ -28,9 +29,10 @@ defmodule Staxx.WebApiWeb.Api.V1.DockerController do
     end
   end
 
+  @spec stop(Plug.Conn.t(), map) :: Plug.Conn.t()
   def stop(conn, %{"id" => id}) do
     case Docker.stop(id) do
-      {:ok, _id} ->
+      :ok ->
         conn
         |> put_status(200)
         |> put_view(SuccessView)

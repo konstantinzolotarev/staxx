@@ -12,6 +12,7 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
   alias Staxx.WebApiWeb.Api.V1.SuccessView
   alias Staxx.WebApiWeb.Api.V1.ErrorView
 
+  @spec start(Plug.Conn.t(), map) :: {:error, any} | Plug.Conn.t()
   def start(conn, %{"testchain" => _} = params) do
     Logger.debug(fn -> "#{__MODULE__}: New instance is starting" end)
 
@@ -24,6 +25,7 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
     end
   end
 
+  @spec stop(Plug.Conn.t(), map) :: {:error, :not_found} | Plug.Conn.t()
   def stop(conn, %{"id" => id}) do
     Logger.debug(fn -> "#{__MODULE__}: Stopping instance #{id}" end)
 
@@ -35,6 +37,7 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
     end
   end
 
+  @spec info(Plug.Conn.t(), map) :: Plug.Conn.t()
   def info(conn, %{"id" => id}) do
     Logger.debug(fn -> "#{__MODULE__}: Loading instance #{id} details" end)
 
@@ -52,6 +55,7 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
     end
   end
 
+  @spec list(Plug.Conn.t(), any) :: Plug.Conn.t()
   def list(conn, _) do
     Logger.debug(fn -> "#{__MODULE__}: Loading instances list" end)
 
@@ -67,6 +71,7 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
     |> render("200.json", data: list)
   end
 
+  @spec remove(Plug.Conn.t(), map) :: {:error, <<_::64, _::_*8>>} | Plug.Conn.t()
   def remove(conn, %{"id" => id}) do
     Logger.debug(fn -> "#{__MODULE__}: Removing instance #{id}" end)
 

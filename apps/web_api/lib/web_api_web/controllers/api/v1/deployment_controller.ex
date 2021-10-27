@@ -7,6 +7,7 @@ defmodule Staxx.WebApiWeb.Api.V1.DeploymentController do
   alias Staxx.Testchain.Deployment.BaseApi
   alias Staxx.WebApiWeb.Api.V1.SuccessView
 
+  @spec steps(Plug.Conn.t(), any) :: Plug.Conn.t()
   def steps(conn, _) do
     case StepsFetcher.all() do
       nil ->
@@ -23,6 +24,7 @@ defmodule Staxx.WebApiWeb.Api.V1.DeploymentController do
     end
   end
 
+  @spec reload(Plug.Conn.t(), any) :: Plug.Conn.t()
   def reload(conn, _) do
     StepsFetcher.reload()
 
@@ -32,6 +34,7 @@ defmodule Staxx.WebApiWeb.Api.V1.DeploymentController do
     |> render("200.json", data: %{})
   end
 
+  @spec commit_list(any, any) :: {:error, any} | Plug.Conn.t()
   def commit_list(conn, _) do
     with {:ok, list} <- BaseApi.get_commit_list() do
       conn

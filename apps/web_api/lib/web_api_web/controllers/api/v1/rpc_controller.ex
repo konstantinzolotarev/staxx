@@ -4,6 +4,7 @@ defmodule Staxx.WebApiWeb.Api.V1.RpcController do
 
   alias Staxx.Testchain.Deployment.Worker, as: DeployWorker
 
+  @spec handle(Plug.Conn.t(), map) :: Plug.Conn.t()
   @doc false
   def handle(conn, %{"id" => id, "method" => "RegisterDeployment", "data" => data}) do
     Logger.info("Request id #{id}, method RegisterDeployment, data #{inspect(data)}")

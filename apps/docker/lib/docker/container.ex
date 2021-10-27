@@ -56,7 +56,7 @@ defmodule Staxx.Docker.Container do
   @doc """
   Start new docker container PID with all it's details
   """
-  @spec start_link(t()) :: {:ok, pid}
+  @spec start_link(t()) :: GenServer.on_start()
   def start_link(%__MODULE__{name: ""} = container),
     do: start_link(%__MODULE__{container | name: Docker.random_name()})
 
@@ -179,9 +179,13 @@ defmodule Staxx.Docker.Container do
 
     if id do
       # Stop container in docker daemon
-      res = Docker.stop(id)
+      case Docker.stop(id) do
+        :ok ->
+          Logger.debug(fn -> "Container #{id} stopped." end)
 
-      Logger.debug(fn -> "Got response from stop container try: #{inspect(res, pretty: true)}" end)
+        {:error, err} ->
+          Logger.warn(fn -> "Got error response while stoping container: #{inspect(err, pretty: true)}" end)
+      end
     end
 
     case reason do
@@ -308,10 +312,7 @@ defmodule Staxx.Docker.Container do
   """
   @spec free_ports(t()) :: t()
   def free_ports(%__MODULE__{ports: ports} = container) do
-    updated =
-      ports
-      |> Enum.each(&free_port/1)
-
+    updated = Enum.map(ports, &free_port/1)
     %__MODULE__{container | ports: updated}
   end
 

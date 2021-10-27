@@ -15,9 +15,8 @@ defmodule Staxx.Docker.EventListener do
   require Logger
 
   @doc false
-  def start_link(_) do
-    GenServer.start_link(__MODULE__, nil, name: __MODULE__)
-  end
+  def start_link(_),
+    do: GenServer.start_link(__MODULE__, nil, name: __MODULE__)
 
   @doc false
   def init(_) do
