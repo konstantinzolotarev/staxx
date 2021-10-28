@@ -42,9 +42,7 @@ defmodule Staxx.Instance.DynamicSupervisor do
 
       res ->
         Logger.error(fn ->
-          "#{__MODULE__}: Failed to find supervisor pid for instance #{inspect(id)}, found: #{
-            inspect(res)
-          }"
+          "#{__MODULE__}: Failed to find supervisor pid for instance #{inspect(id)}, found: #{inspect(res)}"
         end)
     end
   end

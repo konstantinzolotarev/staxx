@@ -10,7 +10,6 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
   alias Staxx.WebApiWeb.Schemas.TestchainSchema
 
   alias Staxx.WebApiWeb.Api.V1.SuccessView
-  alias Staxx.WebApiWeb.Api.V1.ErrorView
 
   @spec start(Plug.Conn.t(), map) :: {:error, any} | Plug.Conn.t()
   def start(conn, %{"testchain" => _} = params) do
@@ -46,12 +45,6 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
       |> put_status(200)
       |> put_view(SuccessView)
       |> render("200.json", data: data)
-    else
-      nil ->
-        conn
-        |> put_status(404)
-        |> put_view(ErrorView)
-        |> render("404.json")
     end
   end
 

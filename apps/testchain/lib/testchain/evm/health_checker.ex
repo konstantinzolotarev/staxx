@@ -16,8 +16,8 @@ defmodule Staxx.Testchain.EVM.HealthChecker do
   @typedoc "Checker state"
   @type state :: {Testchain.evm_id(), status()}
 
-  # Health check timeout. 
-  @timeout Application.get_env(:testchain, :health_check_timeout, 5_000)
+  # Health check timeout.
+  @timeout Application.compile_env(:testchain, :health_check_timeout, 5_000)
 
   @doc """
   Return `via` tuple spec for GenServer registration

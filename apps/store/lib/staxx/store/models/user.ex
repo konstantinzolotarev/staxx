@@ -100,16 +100,7 @@ defmodule Staxx.Store.Models.User do
     |> by_email()
     |> case do
       nil ->
-        %{email: email}
-        |> create()
-        |> case do
-          {:ok, %__MODULE__{id: id}} ->
-            id
-
-          {:error, err} ->
-            Logger.error(fn -> "Failed to create user record for #{email}: #{inspect(err)}" end)
-            nil
-        end
+        create_user_by_email(email)
 
       %__MODULE__{id: id} ->
         id
@@ -134,5 +125,18 @@ defmodule Staxx.Store.Models.User do
     |> limit(^limit)
     |> offset(^offset)
     |> Repo.all()
+  end
+
+  defp create_user_by_email(email) do
+    %{email: email}
+    |> create()
+    |> case do
+      {:ok, %__MODULE__{id: id}} ->
+        id
+
+      {:error, err} ->
+        Logger.error(fn -> "Failed to create user record for #{email}: #{inspect(err)}" end)
+        nil
+    end
   end
 end

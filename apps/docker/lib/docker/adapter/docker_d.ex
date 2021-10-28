@@ -153,9 +153,7 @@ defmodule Staxx.Docker.Adapter.DockerD do
 
       {data, exit_code} ->
         {:error,
-         "failed to inspect container with exit code: #{inspect(exit_code)}, and err: #{
-           inspect(data)
-         }"}
+         "failed to inspect container with exit code: #{inspect(exit_code)}, and err: #{inspect(data)}"}
     end
   end
 
@@ -175,9 +173,7 @@ defmodule Staxx.Docker.Adapter.DockerD do
 
       {data, exit_code} ->
         {:error,
-         "failed to inspect container with exit code: #{inspect(exit_code)}, and err: #{
-           inspect(data)
-         }"}
+         "failed to inspect container with exit code: #{inspect(exit_code)}, and err: #{inspect(data)}"}
     end
   end
 

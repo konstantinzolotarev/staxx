@@ -33,14 +33,14 @@ defmodule Staxx.WebApiWeb.Api.V1.FallbackController do
 
   def call(conn, false) do
     conn
-    |> put_status(500)
+    |> put_status(404)
     |> put_view(ErrorView)
     |> render("404.json", message: "Not found")
   end
 
   def call(conn, nil) do
     conn
-    |> put_status(500)
+    |> put_status(404)
     |> put_view(ErrorView)
     |> render("404.json", message: "Not found")
   end

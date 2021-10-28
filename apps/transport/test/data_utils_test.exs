@@ -12,7 +12,8 @@ defmodule Staxx.Transport.DataUtilsTest do
     payload = %{description: description, chain_type: chain_type}
 
     assert {md5, size, filename, %{description: description, chain_type: chain_type}} ==
-             DataUtils.meta_packet(filename, md5, size, payload)
+             filename
+             |> DataUtils.meta_packet(md5, size, payload)
              |> DataUtils.parse_meta_packet()
   end
 
