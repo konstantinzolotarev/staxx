@@ -1,6 +1,5 @@
 # STAXX
-[![Build Status](https://travis-ci.org/makerdao/staxx.svg?branch=master)](https://travis-ci.org/makerdao/staxx)
-[![CircleCI](https://circleci.com/gh/makerdao/staxx.svg?style=svg)](https://circleci.com/gh/makerdao/staxx)
+[![.github/workflows/ci.yml](https://github.com/konstantinzolotarev/staxx/actions/workflows/ci.yml/badge.svg)](https://github.com/konstantinzolotarev/staxx/actions/workflows/ci.yml)
 
 
 ## Prerequisite Installations
