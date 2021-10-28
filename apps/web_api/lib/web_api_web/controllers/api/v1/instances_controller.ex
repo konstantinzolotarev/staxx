@@ -10,7 +10,6 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
   alias Staxx.WebApiWeb.Schemas.TestchainSchema
 
   alias Staxx.WebApiWeb.Api.V1.SuccessView
-  alias Staxx.WebApiWeb.Api.V1.ErrorView
 
   @spec start(Plug.Conn.t(), map) :: {:error, any} | Plug.Conn.t()
   def start(conn, %{"testchain" => _} = params) do
