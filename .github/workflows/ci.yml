@@ -40,4 +40,5 @@ jobs:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
       - run: mix deps.get
+      - run: make pull-evms
       - run: mix test
