@@ -184,7 +184,9 @@ defmodule Staxx.Docker.Container do
           Logger.debug(fn -> "Container #{id} stopped." end)
 
         {:error, err} ->
-          Logger.warn(fn -> "Got error response while stoping container: #{inspect(err, pretty: true)}" end)
+          Logger.warn(fn ->
+            "Got error response while stoping container: #{inspect(err, pretty: true)}"
+          end)
       end
     end
 

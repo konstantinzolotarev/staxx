@@ -16,7 +16,7 @@ defmodule Staxx.Testchain.EVM do
   alias Staxx.Store.Models.Chain, as: ChainRecord
 
   # Amount of ms the server is allowed to spend initializing or it will be terminated
-  @timeout Application.get_env(:testchain, :kill_timeout, 60_000)
+  @timeout Application.compile_env(:testchain, :kill_timeout, 60_000)
 
   @typedoc """
   List of EVM lifecircle statuses
@@ -247,7 +247,7 @@ defmodule Staxx.Testchain.EVM do
       @behaviour EVM
 
       # Default deployment git reference
-      @default_deploy_ref Application.get_env(:testchain, :default_deployment_scripts_git_ref)
+      @default_deploy_ref Application.compile_env(:testchain, :default_deployment_scripts_git_ref)
 
       # maximum amount of checks for evm started
       # system checks if evm started every 200ms
@@ -481,9 +481,7 @@ defmodule Staxx.Testchain.EVM do
         %Config{id: id, deploy_step_id: deploy_step} = config
 
         Logger.debug(fn ->
-          "#{config.id}: New EVM started successfully, have deployment step to perform: #{
-            deploy_step
-          }"
+          "#{config.id}: New EVM started successfully, have deployment step to perform: #{deploy_step}"
         end)
 
         # Load step details
@@ -515,9 +513,7 @@ defmodule Staxx.Testchain.EVM do
         else
           err ->
             Logger.error(
-              "#{id}: Failed to fetch steps from deployment service. Deploy ommited #{
-                inspect(err)
-              }"
+              "#{id}: Failed to fetch steps from deployment service. Deploy ommited #{inspect(err)}"
             )
 
             Helper.notify_error(id, "failed to start deployment process")

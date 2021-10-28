@@ -8,7 +8,7 @@ defmodule Staxx.Docker do
   alias Staxx.Docker.Struct.SyncResult
 
   # Sync docker operation timeout
-  @timeout Application.get_env(:docker, :sync_timmeout, 180_000)
+  @timeout Application.compile_env(:docker, :sync_timmeout, 180_000)
 
   @doc """
   Start existing container in system

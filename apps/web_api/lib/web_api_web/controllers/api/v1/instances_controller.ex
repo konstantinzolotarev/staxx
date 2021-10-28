@@ -46,12 +46,6 @@ defmodule Staxx.WebApiWeb.Api.V1.InstancesController do
       |> put_status(200)
       |> put_view(SuccessView)
       |> render("200.json", data: data)
-    else
-      nil ->
-        conn
-        |> put_status(404)
-        |> put_view(ErrorView)
-        |> render("404.json")
     end
   end
 

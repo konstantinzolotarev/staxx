@@ -73,8 +73,7 @@ defmodule Staxx.Transport.Server do
   # Accepts connection to socket and starts listener worker under `Staxx.Transport.ListenerSupervisor`.
   # TODO: rewrite as a pool.
   defp accept_loop(socket, tmp_dir, receiver_pid, supervisor_pid) do
-    :gen_tcp.accept(socket)
-    |> case do
+    case :gen_tcp.accept(socket) do
       {:ok, client} ->
         ListenerSupervisor.start_listener(supervisor_pid, client, {tmp_dir, receiver_pid})
 

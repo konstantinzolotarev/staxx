@@ -1,7 +1,7 @@
 defmodule Staxx.Testchain.EVMTestCase do
   @moduledoc """
   Default test for every EVM.
-  All EVMs (chains) have to pass this test
+  All EVMs (chains) have to pass this test.
   """
 
   defmacro __using__(opts) do
@@ -21,7 +21,7 @@ defmodule Staxx.Testchain.EVMTestCase do
       alias Staxx.Store.Models.Chain, as: ChainRecord
       alias Staxx.Store.Models.User, as: UserRecord
 
-      @timeout unquote(opts)[:timeout] || Application.get_env(:testchain, :kill_timeout)
+      @timeout unquote(opts)[:timeout] || Application.compile_env(:testchain, :kill_timeout)
       @chain unquote(opts)[:chain]
 
       @moduletag :testchain

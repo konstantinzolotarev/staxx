@@ -53,18 +53,20 @@ defmodule Staxx.WebApiWeb.V1.ApiChannel do
   end
 
   def handle_in("remove_chain", %{"id" => id}, socket) do
-    with :ok <- Testchain.remove(id) do
-      {:reply, {:ok, %{message: "Chain removed"}}, socket}
-    else
+    case Testchain.remove(id) do
+      :ok ->
+        {:reply, {:ok, %{message: "Chain removed"}}, socket}
+
       _ ->
         {:reply, {:error, %{message: "Something wrong on removing chain"}}, socket}
     end
   end
 
   def handle_in("remove_snapshot", %{"id" => id}, socket) do
-    with :ok <- SnapshotManager.remove(id) do
-      {:reply, {:ok, %{message: "Snapshot removed"}}, socket}
-    else
+    case SnapshotManager.remove(id) do
+      :ok ->
+        {:reply, {:ok, %{message: "Snapshot removed"}}, socket}
+
       _ ->
         {:reply, {:error, %{message: "Something wrong on removing snapshot"}}, socket}
     end

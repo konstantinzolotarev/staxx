@@ -419,19 +419,23 @@ defmodule Staxx.Testchain.Helper do
     |> UserRecord.by_email()
     |> case do
       nil ->
-        %{email: email}
-        |> UserRecord.create()
-        |> case do
-          {:ok, user} ->
-            user
-
-          {:error, err} ->
-            Logger.error(fn -> "Failed to create user record for #{email}: #{inspect(err)}" end)
-            nil
-        end
+        create_user_by_email(email)
 
       user ->
         user
+    end
+  end
+
+  defp create_user_by_email(email) do
+    %{email: email}
+    |> UserRecord.create()
+    |> case do
+      {:ok, user} ->
+        user
+
+      {:error, err} ->
+        Logger.error(fn -> "Failed to create user record for #{email}: #{inspect(err)}" end)
+        nil
     end
   end
 end

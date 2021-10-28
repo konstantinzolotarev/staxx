@@ -177,7 +177,9 @@ defmodule Staxx.Testchain.EVM.Implementation.Geth do
     ]
 
     # If version is greater than 1.8.17 need to add additional flag
-    case Version.compare(get_version(), "1.8.27") do
+    get_version()
+    |> Version.compare("1.8.27")
+    |> case do
       :gt ->
         cmd ++ ["--allow-insecure-unlock"]
 

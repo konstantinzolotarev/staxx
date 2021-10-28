@@ -21,7 +21,8 @@ defmodule Staxx.Transport.FileFactory do
   @spec create_file(pos_integer()) :: {:ok, Path.t()} | {:error, term()}
   def create_file(size_bytes) when is_integer(size_bytes) and size_bytes > 0 do
     filepath =
-      Application.get_env(:transport, :file_factory_dir, "/tmp")
+      :transport
+      |> Application.get_env(:file_factory_dir, "/tmp")
       |> Path.join(FileUtils.random_filename())
 
     args = [
@@ -31,8 +32,7 @@ defmodule Staxx.Transport.FileFactory do
       block_size_arg(@block_size)
     ]
 
-    System.cmd("dd", args)
-    |> case do
+    case System.cmd("dd", args) do
       {_response, 0} -> {:ok, filepath}
       {response, _} -> {:error, response}
     end
@@ -42,7 +42,7 @@ defmodule Staxx.Transport.FileFactory do
   defp output_arg(filepath), do: "of=" <> filepath
 
   defp count_arg(size_bytes, block_size),
-    do: "count=" <> (div(size_bytes, block_size) |> Integer.to_string())
+    do: "count=" <> Integer.to_string(div(size_bytes, block_size))
 
-  defp block_size_arg(block_size), do: "bs=" <> (block_size |> Integer.to_string())
+  defp block_size_arg(block_size), do: "bs=" <> Integer.to_string(block_size)
 end
